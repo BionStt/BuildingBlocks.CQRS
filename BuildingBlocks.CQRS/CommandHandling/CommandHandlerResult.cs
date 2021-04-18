@@ -1,13 +1,15 @@
 ﻿using BuildingBlocks.CQRS.Core;
+using FluentValidation.Results;
 
 namespace BuildingBlocks.CQRS.CommandHandling
 {
     /// <summary>
     /// CommandHandler result class
     /// Only Id of struct and ValidationResult properties 
-    /// to prevent CommandHandlers from being used as QueryHandlers
+    /// Preventing CommandHandlers from being used as QueryHandlers
     /// </summary>
-    public class CommandHandlerResult<TID> : HandlerResult where TID : struct
+    /// <typeparam name="TID"></typeparam>
+    public class CommandHandlerResult<TID> : CommandHandlerResultBase where TID : struct
     {
         /// <summary>
         /// Id of an entity class
@@ -18,5 +20,24 @@ namespace BuildingBlocks.CQRS.CommandHandling
         {
             ValidationResult = command.Validate();
         }
+    }
+
+    /// <summary>
+    /// No Id return implementation
+    /// </summary>
+    public class CommandHandlerResult : CommandHandlerResultBase
+    {
+        public CommandHandlerResult(ICommand<CommandHandlerResult> command)
+        {
+            ValidationResult = command.Validate();
+        }
+    }
+
+    /// <summary>
+    /// Common validation result object
+    /// </summary>
+    public abstract class CommandHandlerResultBase
+    {
+        public ValidationResult ValidationResult { get; set; }
     }
 }

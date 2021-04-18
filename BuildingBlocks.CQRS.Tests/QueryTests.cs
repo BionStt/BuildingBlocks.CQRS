@@ -8,14 +8,14 @@ namespace BuildingBlocks.CQRS.Tests
         [Test]
         public void Query_Is_Valid()
         {
-            var query = new ExampleQuery(123).Validate();
+            var query = new QueryExample(123).Validate();
             Assert.True(query.IsValid);
         }
 
         [Test]
         public void Query_Is_Not_Valid()
         {
-            var query = new ExampleQuery(-1).Validate();
+            var query = new QueryExample(-1).Validate();
             Assert.False(query.IsValid);
         }
     }

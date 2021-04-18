@@ -4,9 +4,9 @@ using BuildingBlocks.CQRS.QueryHandling;
 
 namespace BuildingBlocks.CQRS.Tests.Examples
 {
-    internal class ExampleQueryHandler : QueryHandler<ExampleQuery, ExampleResultObject>
+    internal class QueryHandlerExample : QueryHandler<QueryExample, ExampleResultObject>
     {
-        public override async Task<ExampleResultObject> ExecuteQuery(ExampleQuery query, CancellationToken cancellationToken)
+        public override async Task<ExampleResultObject> ExecuteQuery(QueryExample query, CancellationToken cancellationToken)
         {
             return await Task.FromResult(new ExampleResultObject(query.Id));
         }

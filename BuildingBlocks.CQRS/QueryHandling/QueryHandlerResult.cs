@@ -1,14 +1,17 @@
 ﻿using BuildingBlocks.CQRS.Core;
+using FluentValidation.Results;
 
 namespace BuildingBlocks.CQRS.QueryHandling
 {
     /// <summary>
     /// QueryHandler result class
     /// </summary>
-    public class QueryHandlerResult<TResult> : HandlerResult
+    /// <typeparam name="TResult"></typeparam>
+    public class QueryHandlerResult<TResult>
     {
-        public TResult Result { get; set; }
+        public ValidationResult ValidationResult { get; }
 
+        public TResult Result { get; set; }
 
         public QueryHandlerResult(IQuery<QueryHandlerResult<TResult>> query)
         {

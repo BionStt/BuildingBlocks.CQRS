@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.CQRS", "BuildingBlocks.CQRS\BuildingBlocks.CQRS.csproj", "{F5CB5E51-AD21-437D-A1A6-E6954A9924E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks.CQRS", "BuildingBlocks.CQRS\BuildingBlocks.CQRS.csproj", "{F5CB5E51-AD21-437D-A1A6-E6954A9924E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.CQRS.Tests", "BuildingBlocks.CQRS.Tests\BuildingBlocks.CQRS.Tests.csproj", "{8D1AAF73-E051-44E2-968C-869C6CDF5A68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks.CQRS.Tests", "BuildingBlocks.CQRS.Tests\BuildingBlocks.CQRS.Tests.csproj", "{8D1AAF73-E051-44E2-968C-869C6CDF5A68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

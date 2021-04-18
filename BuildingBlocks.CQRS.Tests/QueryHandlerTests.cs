@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.CQRS.Tests.Examples;
@@ -12,8 +11,8 @@ namespace BuildingBlocks.CQRS.Tests
         public async Task Query_Is_Executed()
         {
             var id = 123;
-            var query = new ExampleQuery(id);
-            var handler = await new ExampleQueryHandler().Handle(query, CancellationToken.None);
+            var query = new QueryExample(id);
+            var handler = await new QueryHandlerExample().Handle(query, CancellationToken.None);
 
             Assert.True(handler.Result.Id == id);
             Assert.True(handler.ValidationResult.Errors.Count == 0);
@@ -23,10 +22,10 @@ namespace BuildingBlocks.CQRS.Tests
         public async Task Query_Is_Not_Executed()
         {
             var id = -1;
-            var query = new ExampleQuery(id);
-            var handler = await new ExampleQueryHandler().Handle(query, CancellationToken.None);
+            var query = new QueryExample(id);
+            var handler = await new QueryHandlerExample().Handle(query, CancellationToken.None);
 
-            Assert.True(handler.Result == null);
+            Assert.IsNull(handler.Result);
             Assert.True(handler.ValidationResult.Errors.Count > 0);
         }
     }    

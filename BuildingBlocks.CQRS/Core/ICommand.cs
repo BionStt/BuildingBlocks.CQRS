@@ -3,9 +3,7 @@
 namespace BuildingBlocks.CQRS.Core
 {
     /// <summary>
-    /// Interface to implement Commands
+    /// Interfaces to implement Commands
     /// </summary>
-    public interface ICommand : IValidationHandler, IRequest {}
-
-    public interface ICommand<out TResult> : IValidationHandler, IRequest<TResult> {}
+    public interface ICommand<out TResult> : IValidationResult, IRequest<TResult> {}
 }

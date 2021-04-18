@@ -7,31 +7,20 @@ namespace BuildingBlocks.CQRS.Tests
     public class CommandTests
     {
         [Test]
-        public void Guid_Id_Command_Is_Valid()
+        public void Command_Is_Valid()
         {
-            var command = new ExampleGuidResultCommand(Guid.NewGuid()).Validate();
+            var command = new CommandExample("test@test.com").Validate();
             Assert.True(command.IsValid);
         }
 
         [Test]
-        public void Guid_Id_Command_Is_Not_Valid()
+        public void Command_Is_Not_Valid()
         {
-            var command = new ExampleGuidResultCommand(new Guid()).Validate();
-            Assert.False(command.IsValid);
-        }
-
-        [Test]
-        public void Int_Id_Command_Is_Valid()
-        {
-            var command = new ExampleIntResultCommand(123).Validate();
-            Assert.True(command.IsValid);
-        }
-
-        [Test]
-        public void Int_Id_Command_Is_Not_Valid()
-        {
-            var command = new ExampleIntResultCommand(-1).Validate();
-            Assert.False(command.IsValid);
+            var emptyCommand = new CommandExample(string.Empty).Validate();
+            var invalidAddressCommand = new CommandExample("test").Validate();
+            
+            Assert.False(emptyCommand.IsValid);
+            Assert.False(invalidAddressCommand.IsValid);
         }
     }
 }

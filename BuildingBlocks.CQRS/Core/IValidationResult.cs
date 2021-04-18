@@ -3,11 +3,12 @@
 namespace BuildingBlocks.CQRS.Core
 {
     /// <summary>
-    /// Interface for FluentValidation object
+    /// Interface for FluentValidation result
     /// </summary>
-    /// <returns></returns>
-    public interface IValidationHandler
+    public interface IValidationResult
     {
+        ValidationResult ValidationResult { get; set; }
+
         /// <summary>
         /// To override
         /// </summary>

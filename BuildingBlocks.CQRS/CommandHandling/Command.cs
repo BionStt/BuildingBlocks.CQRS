@@ -4,14 +4,20 @@ using FluentValidation.Results;
 namespace BuildingBlocks.CQRS.CommandHandling
 {
     /// <summary>
-    /// Abstract class meant to be inherited by Commands
+    /// Abstract classes meant to be inherited by Commands
     /// </summary>
-    /// <typeparam name="TResult"></typeparam>
-    public abstract class Command<TID> : IValidationHandler, ICommand<CommandHandlerResult<TID>>
-        where TID : struct
-    {
-        public ValidationResult ValidationResult { get; set; } = new ValidationResult();
+    
+    public abstract class Command : CommandBase, ICommand<CommandHandlerResult> {}
+    public abstract class Command<TID> : CommandBase, ICommand<CommandHandlerResult<TID>> where TID : struct { }
 
+    public abstract class CommandBase
+    {
+        public ValidationResult ValidationResult { get; set; }
+
+        /// <summary>
+        /// Validation method
+        /// </summary>
+        /// <returns></returns>
         public virtual ValidationResult Validate()
         {
             return ValidationResult;

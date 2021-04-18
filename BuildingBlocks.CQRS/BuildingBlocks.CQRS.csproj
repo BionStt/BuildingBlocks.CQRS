@@ -1,13 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <Company>Falberthen</Company>
-    <Description>A simple set to support CQRS implementation using MediatR and FluentValidation.</Description>
+    <Description>An abstraction to ease implementing CQRS using MediatR and FluentValidation, performing both handling and validation by following simple conventions.</Description>
     <PackageProjectUrl>https://github.com/falberthen/BuildingBlocks.CQRS</PackageProjectUrl>
     <RepositoryUrl>https://github.com/falberthen/BuildingBlocks.CQRS</RepositoryUrl>
     <Authors>Felipe Alberto (fealberto@gmail.com)</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Version>1.1.0</Version>
+    <Copyright>MIT</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
