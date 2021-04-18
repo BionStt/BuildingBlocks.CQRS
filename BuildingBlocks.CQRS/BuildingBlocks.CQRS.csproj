@@ -8,14 +8,14 @@
     <RepositoryUrl>https://github.com/falberthen/BuildingBlocks.CQRS</RepositoryUrl>
     <Authors>Felipe Alberto (fealberto@gmail.com)</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>1.1.0</Version>
+    <Version>2.0.0</Version>
     <Copyright>MIT</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="9.2.2" />
-    <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="FluentValidation" Version="10.0.4" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
