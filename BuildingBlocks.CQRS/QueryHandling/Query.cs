@@ -4,7 +4,7 @@ using FluentValidation.Results;
 namespace BuildingBlocks.CQRS.QueryHandling
 {
     /// <summary>
-    /// Abstract class meant to be inherited by Queries
+    /// Abstract class to be inherited by Queries
     /// </summary>
     public abstract class Query<TResult> : IQuery<QueryHandlerResult<TResult>>
     {

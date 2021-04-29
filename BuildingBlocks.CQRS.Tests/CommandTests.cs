@@ -1,26 +1,27 @@
-using System;
-using NUnit.Framework;
 using BuildingBlocks.CQRS.Tests.Examples;
+using FluentAssertions;
+using Xunit;
 
 namespace BuildingBlocks.CQRS.Tests
 {
     public class CommandTests
     {
-        [Test]
-        public void Command_Is_Valid()
+        [Fact]
+        public void Command_is_valid()
         {
             var command = new CommandExample("test@test.com").Validate();
-            Assert.True(command.IsValid);
+
+            command.IsValid.Should().BeTrue();
         }
 
-        [Test]
-        public void Command_Is_Not_Valid()
+        [Fact]
+        public void Command_is_not_valid()
         {
             var emptyCommand = new CommandExample(string.Empty).Validate();
             var invalidAddressCommand = new CommandExample("test").Validate();
-            
-            Assert.False(emptyCommand.IsValid);
-            Assert.False(invalidAddressCommand.IsValid);
+
+            emptyCommand.IsValid.Should().BeFalse();
+            invalidAddressCommand.IsValid.Should().BeFalse();
         }
     }
 }

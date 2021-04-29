@@ -2,48 +2,57 @@ using System;
 using System.Threading.Tasks;
 using BuildingBlocks.CQRS.CommandHandling;
 using BuildingBlocks.CQRS.Tests.Examples;
-using NUnit.Framework;
+using FluentAssertions;
+using Xunit;
 
 namespace BuildingBlocks.CQRS.Tests
 {
     public class CommandHandlerTests
     {
-        [Test]
-        public async Task Command_Is_Executed()
+        [Fact]
+        public async Task Command_is_executed()
         {
             var command = new CommandExample("test@test.com");
             CommandHandlerResult handlerResult = await new CommandHandlerExample().Handle(command);
 
-            Assert.True(handlerResult.ValidationResult.Errors.Count == 0);
+            handlerResult.ValidationResult.IsValid.Should().BeTrue();
         }
 
-        [Test]
-        public async Task Command_Is_Not_Executed()
+        [Fact]
+        public async Task Command_is_not_Executed()
         {
             var command = new CommandExample(string.Empty);
             CommandHandlerResult handlerResult = await new CommandHandlerExample().Handle(command);
 
-            Assert.True(handlerResult.ValidationResult.Errors.Count > 0);
+            handlerResult.ValidationResult.IsValid.Should().BeFalse();
         }
 
-        [Test]
-        public async Task Typed_Command_Is_Executed()
+        [Fact]
+        public async Task CommandHandler_fails_with_exception()
+        {
+            var command = new CommandExample("test@test.com");
+            var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => new FaultyCommandHandlerExample().Handle(command));
+            ex.GetType().Should().Be(typeof(ArgumentNullException));
+        }
+
+        [Fact]
+        public async Task Typed_Command_is_executed()
         {
             var command = new TypedCommandExample("Foo");
             CommandHandlerResult<Guid> handlerResult = await new TypedCommandHandlerExample().Handle(command);
 
-            Assert.True(handlerResult.ValidationResult.Errors.Count == 0);
-            Assert.True(handlerResult.Id != Guid.Empty);
+            handlerResult.ValidationResult.IsValid.Should().BeTrue();
+            handlerResult.Id.Should().NotBeEmpty();
         }
 
-        [Test]
-        public async Task Typed_Command_Is_Not_Executed()
+        [Fact]
+        public async Task Typed_Command_is_not_executed()
         {
             var command = new TypedCommandExample(string.Empty);
             CommandHandlerResult<Guid> handlerResult = await new TypedCommandHandlerExample().Handle(command);
 
-            Assert.True(handlerResult.ValidationResult.Errors.Count > 0);
-            Assert.True(handlerResult.Id == Guid.Empty);
+            handlerResult.ValidationResult.IsValid.Should().BeFalse();
+            handlerResult.Id.Should().BeEmpty();
         }
     }
 }

@@ -1,32 +1,33 @@
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.CQRS.Tests.Examples;
-using NUnit.Framework;
+using Xunit;
+using FluentAssertions;
 
 namespace BuildingBlocks.CQRS.Tests
 {
     public class QueryHandlerTests
     {
-        [Test]
-        public async Task Query_Is_Executed()
+        [Fact]
+        public async Task Query_is_executed()
         {
             var id = 123;
             var query = new QueryExample(id);
             var handler = await new QueryHandlerExample().Handle(query, CancellationToken.None);
 
-            Assert.True(handler.Result.Id == id);
-            Assert.True(handler.ValidationResult.Errors.Count == 0);
+            handler.Result.Id.Should().Be(id);
+            handler.ValidationResult.IsValid.Should().BeTrue();
         }
 
-        [Test]
-        public async Task Query_Is_Not_Executed()
+        [Fact]
+        public async Task Query_is_not_executed()
         {
             var id = -1;
             var query = new QueryExample(id);
             var handler = await new QueryHandlerExample().Handle(query, CancellationToken.None);
 
-            Assert.IsNull(handler.Result);
-            Assert.True(handler.ValidationResult.Errors.Count > 0);
+            handler.Result.Should().BeNull();
+            handler.ValidationResult.IsValid.Should().BeFalse();
         }
     }    
 }

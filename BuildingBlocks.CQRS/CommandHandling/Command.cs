@@ -8,7 +8,7 @@ namespace BuildingBlocks.CQRS.CommandHandling
     /// </summary>
     
     public abstract class Command : CommandBase, ICommand<CommandHandlerResult> {}
-    public abstract class Command<TID> : CommandBase, ICommand<CommandHandlerResult<TID>> where TID : struct { }
+    public abstract class Command<TID> : CommandBase, ICommand<CommandHandlerResult<TID>> where TID : struct {}
 
     public abstract class CommandBase
     {

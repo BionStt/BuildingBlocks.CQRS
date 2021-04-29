@@ -13,6 +13,20 @@ namespace BuildingBlocks.CQRS.Tests.Examples
         }
     }
 
+    internal class FaultyCommandHandlerExample : CommandHandler<CommandExample>
+    {
+        public async override Task ExecuteCommand(CommandExample command, CancellationToken cancellationToken = default)
+        {
+            ThrowException();
+            await Task.FromResult(new CommandHandlerResult(command));
+        }
+
+        private void ThrowException()
+        {
+            throw new ArgumentNullException();
+        }
+    }
+
     internal class TypedCommandHandlerExample : CommandHandler<TypedCommandExample, Guid>
     {
         public async override Task<Guid> ExecuteCommand(TypedCommandExample command, CancellationToken cancellationToken = default)

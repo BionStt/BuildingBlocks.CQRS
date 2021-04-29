@@ -1,0 +1,14 @@
+v.1.0.0
+  - Initial release.
+
+v.1.1.0
+  - Allows implementing Command/Handlers with returning Tasks (and not only structs).
+
+v.2.0.0 
+  - BREAKING CHANGE: using FluentValidation (>= 10.0.4) and MediatR (>= 9.0.0).
+ 
+v.2.0.1
+  - Fixed exception handling issue.
+  
+v.2.0.2
+  - Core code improvements.  

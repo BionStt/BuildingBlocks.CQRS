@@ -1,5 +1,6 @@
 ﻿using BuildingBlocks.CQRS.Core;
 using FluentValidation.Results;
+using System;
 
 namespace BuildingBlocks.CQRS.CommandHandling
 {
@@ -9,35 +10,37 @@ namespace BuildingBlocks.CQRS.CommandHandling
     /// Preventing CommandHandlers from being used as QueryHandlers
     /// </summary>
     /// <typeparam name="TID"></typeparam>
-    public class CommandHandlerResult<TID> : CommandHandlerResultBase where TID : struct
+    public sealed class CommandHandlerResult<TID> : CommandHandlerResultBase
+        where TID : struct
     {
         /// <summary>
         /// Id of an entity class
         /// </summary>
         public TID Id { get; set; }
 
-        public CommandHandlerResult(ICommand<CommandHandlerResult<TID>> command)
-        {
-            ValidationResult = command.Validate();
-        }
+        public CommandHandlerResult(ICommand<CommandHandlerResult<TID>> command) : base(command) {}
     }
 
     /// <summary>
     /// No Id return implementation
     /// </summary>
-    public class CommandHandlerResult : CommandHandlerResultBase
+    public sealed class CommandHandlerResult : CommandHandlerResultBase
     {
-        public CommandHandlerResult(ICommand<CommandHandlerResult> command)
-        {
-            ValidationResult = command.Validate();
-        }
+        public CommandHandlerResult(ICommand<CommandHandlerResult> command) : base(command) {}
     }
 
     /// <summary>
-    /// Common validation result object
+    /// No Id return implementation
     /// </summary>
-    public abstract class CommandHandlerResultBase
+    public abstract class CommandHandlerResultBase : ICommandHandlerResult
     {
         public ValidationResult ValidationResult { get; set; }
+        public CommandHandlerResultBase(ICommand<ICommandHandlerResult> command)
+        {
+            if (command == null)
+                throw new ArgumentNullException(nameof(command));
+
+            ValidationResult = command.Validate();
+        }
     }
 }

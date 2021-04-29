@@ -1,22 +1,23 @@
-using NUnit.Framework;
 using BuildingBlocks.CQRS.Tests.Examples;
+using FluentAssertions;
+using Xunit;
 
 namespace BuildingBlocks.CQRS.Tests
 {
     public class QueryTests
     {
-        [Test]
-        public void Query_Is_Valid()
+        [Fact]
+        public void Query_is_valid()
         {
             var query = new QueryExample(123).Validate();
-            Assert.True(query.IsValid);
+            query.IsValid.Should().BeTrue();
         }
 
-        [Test]
-        public void Query_Is_Not_Valid()
+        [Fact]
+        public void Query_is_not_valid()
         {
             var query = new QueryExample(-1).Validate();
-            Assert.False(query.IsValid);
+            query.IsValid.Should().BeFalse();
         }
     }
 }
